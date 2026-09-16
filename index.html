@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Kỹ Thuật Tòa Nhà</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #17365d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #17365d;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: #17365d;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0f2744;
+        }
+
+        .success {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 7px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .stat {
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header h1 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>QUẢN LÝ KỸ THUẬT TÒA NHÀ</h1>
+    <p>Hệ thống báo cáo và quản lý công việc kỹ thuật</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>📊 Tổng quan</h2>
+
+        <div class="dashboard">
+            <div class="stat">
+                <strong>0</strong>
+                Báo cáo
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                Chưa xử lý
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                Đang xử lý
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                Hoàn thành
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+
+        <h2>📝 Nhập báo cáo kỹ thuật</h2>
+
+        <form id="reportForm">
+
+            <div class="form-group">
+                <label>Ngày báo cáo</label>
+                <input type="date" id="date" required>
+            </div>
+
+            <div class="form-group">
+                <label>Dự án / Tòa nhà</label>
+
+                <select id="building" required>
+                    <option value="">-- Chọn dự án --</option>
+                    <option>68 Phan Đăng Lưu</option>
+                    <option>62 Trần Huy Liệu</option>
+                    <option>127 Hồng Hà</option>
+                    <option>130 Hồng Hà</option>
+                    <option>399</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Người thực hiện</label>
+                <input type="text" id="person" placeholder="Nhập tên kỹ thuật">
+            </div>
+
+            <div class="form-group">
+                <label>Hạng mục kỹ thuật</label>
+
+                <select id="category">
+                    <option>Điện</option>
+                    <option>Điều hòa</option>
+                    <option>Cấp thoát nước</option>
+                    <option>PCCC</option>
+                    <option>Thang máy</option>
+                    <option>Xây dựng</option>
+                    <option>Cửa kính</option>
+                    <option>Khác</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Nội dung công việc</label>
+
+                <textarea
+                    id="content"
+                    placeholder="Nhập nội dung công việc / sự cố..."
+                    required>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Biện pháp xử lý</label>
+
+                <textarea
+                    id="solution"
+                    placeholder="Nhập biện pháp xử lý...">
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Trạng thái</label>
+
+                <select id="status">
+                    <option>Chưa xử lý</option>
+                    <option>Đang xử lý</option>
+                    <option>Hoàn thành</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Hình ảnh</label>
+                <input type="file" accept="image/*" multiple>
+            </div>
+
+            <button type="submit">
+                💾 Lưu báo cáo
+            </button>
+
+            <div class="success" id="success">
+                ✅ Báo cáo đã được ghi nhận!
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("reportForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("success").style.display = "block";
+
+});
+
+</script>
+
+</body>
+</html>
